@@ -5,8 +5,10 @@ from prettytable import PrettyTable
 
 
 def parse(index_station1, index_station2, current_d):
+    user_agent = {
+        'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; hu-HU; rv:1.7.8) Gecko/20050511 Firefox/1.0.4'}
     url = f"https://swrailway.gov.ua/timetable/eltrain/?sid1={index_station1}&sid2={index_station2}&eventdate={current_d}"
-    source_code = requests.get(url, verify=False).text
+    source_code = requests.get(url, headers=user_agent, verify='swrailway-gov-ua-chain.pem').text
     soup = BeautifulSoup(source_code, "lxml")
 
     table_parse = soup.find('table', class_='td_center')
