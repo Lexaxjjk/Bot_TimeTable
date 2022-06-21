@@ -39,7 +39,7 @@ stations = []
 current_date = str(datetime.now().date())
 
 kb_admin_home = types.ReplyKeyboardMarkup(resize_keyboard=True)
-user_date = current_date
+
 
 kb_home_user = types.ReplyKeyboardMarkup(resize_keyboard=True)
 kb_home_user.add(types.InlineKeyboardButton(text='Розклад на сьогодні'))
@@ -111,6 +111,8 @@ async def time_table_in_user_date(message: types.Message, state: FSMContext):
 @dp.message_handler(content_types=['text'], text='Розклад на сьогодні')
 async def start_time_table_in_current_date(message: Message):
     await dialog.in_user_date.set()
+    global user_date
+    user_date = current_date
     await message.answer(f'Оберіть станцію відправлення:', reply_markup=keyboard_stations)
 
 
