@@ -56,7 +56,9 @@ def table(index_station1, index_station2, station1, station2, date):
     )
     table_data = table_data.get_string()
 
-    image = Image.new("RGB", (1050, 200), "white")
+    image_width = 775 + ((len(station1)+len(station2)) * 9)
+    image_height = 90 + (len(result_parse['days'] * 20))
+    image = Image.new("RGB", (image_width, image_height), "white")
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("FreeMono.ttf", 15)
     draw.text((10, 10), str(table_data), font=font, fill="black")
